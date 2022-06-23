@@ -1,0 +1,484 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"touch.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.ILI9341_TouchSelect,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	ILI9341_TouchSelect:
+  24              	.LFB68:
+  25              		.file 1 "Core/Src/touch.c"
+   1:Core/Src/touch.c **** /* vim: set ai et ts=4 sw=4: */
+   2:Core/Src/touch.c **** 
+   3:Core/Src/touch.c **** #include "stm32f1xx_hal.h"
+   4:Core/Src/touch.c **** #include "touch.h"
+   5:Core/Src/touch.c **** #include <stdio.h>
+   6:Core/Src/touch.c **** 
+   7:Core/Src/touch.c **** #define READ_X 0xD0
+   8:Core/Src/touch.c **** #define READ_Y 0x90
+   9:Core/Src/touch.c **** 
+  10:Core/Src/touch.c **** static void ILI9341_TouchSelect() {
+  26              		.loc 1 10 35 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 08B5     		push	{r3, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+  11:Core/Src/touch.c ****     HAL_GPIO_WritePin(ILI9341_TOUCH_CS_GPIO_Port, ILI9341_TOUCH_CS_Pin, GPIO_PIN_RESET);
+  35              		.loc 1 11 5 view .LVU1
+  36 0002 0022     		movs	r2, #0
+  37 0004 4FF40061 		mov	r1, #2048
+  38 0008 0148     		ldr	r0, .L3
+  39 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  40              	.LVL0:
+  12:Core/Src/touch.c **** }
+  41              		.loc 1 12 1 is_stmt 0 view .LVU2
+  42 000e 08BD     		pop	{r3, pc}
+  43              	.L4:
+  44              		.align	2
+  45              	.L3:
+  46 0010 00080140 		.word	1073809408
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 2
+
+
+  47              		.cfi_endproc
+  48              	.LFE68:
+  50              		.section	.text.ILI9341_TouchUnselect,"ax",%progbits
+  51              		.align	1
+  52              		.global	ILI9341_TouchUnselect
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  57              	ILI9341_TouchUnselect:
+  58              	.LFB69:
+  13:Core/Src/touch.c **** 
+  14:Core/Src/touch.c **** void ILI9341_TouchUnselect() {
+  59              		.loc 1 14 30 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63 0000 08B5     		push	{r3, lr}
+  64              	.LCFI1:
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 3, -8
+  67              		.cfi_offset 14, -4
+  15:Core/Src/touch.c ****     HAL_GPIO_WritePin(ILI9341_TOUCH_CS_GPIO_Port, ILI9341_TOUCH_CS_Pin, GPIO_PIN_SET);
+  68              		.loc 1 15 5 view .LVU4
+  69 0002 0122     		movs	r2, #1
+  70 0004 4FF40061 		mov	r1, #2048
+  71 0008 0148     		ldr	r0, .L7
+  72 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  73              	.LVL1:
+  16:Core/Src/touch.c **** }
+  74              		.loc 1 16 1 is_stmt 0 view .LVU5
+  75 000e 08BD     		pop	{r3, pc}
+  76              	.L8:
+  77              		.align	2
+  78              	.L7:
+  79 0010 00080140 		.word	1073809408
+  80              		.cfi_endproc
+  81              	.LFE69:
+  83              		.section	.text.ILI9341_TouchPressed,"ax",%progbits
+  84              		.align	1
+  85              		.global	ILI9341_TouchPressed
+  86              		.syntax unified
+  87              		.thumb
+  88              		.thumb_func
+  90              	ILI9341_TouchPressed:
+  91              	.LFB70:
+  17:Core/Src/touch.c **** 
+  18:Core/Src/touch.c **** bool ILI9341_TouchPressed() {
+  92              		.loc 1 18 29 is_stmt 1 view -0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0000 08B5     		push	{r3, lr}
+  97              	.LCFI2:
+  98              		.cfi_def_cfa_offset 8
+  99              		.cfi_offset 3, -8
+ 100              		.cfi_offset 14, -4
+  19:Core/Src/touch.c ****     return HAL_GPIO_ReadPin(ILI9341_TOUCH_IRQ_GPIO_Port, ILI9341_TOUCH_IRQ_Pin) == GPIO_PIN_RESET;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 3
+
+
+ 101              		.loc 1 19 5 view .LVU7
+ 102              		.loc 1 19 12 is_stmt 0 view .LVU8
+ 103 0002 4FF48071 		mov	r1, #256
+ 104 0006 0348     		ldr	r0, .L11
+ 105 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 106              	.LVL2:
+  20:Core/Src/touch.c **** }
+ 107              		.loc 1 20 1 view .LVU9
+ 108 000c B0FA80F0 		clz	r0, r0
+ 109 0010 4009     		lsrs	r0, r0, #5
+ 110 0012 08BD     		pop	{r3, pc}
+ 111              	.L12:
+ 112              		.align	2
+ 113              	.L11:
+ 114 0014 00080140 		.word	1073809408
+ 115              		.cfi_endproc
+ 116              	.LFE70:
+ 118              		.section	.text.ILI9341_TouchGetCoordinates,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	ILI9341_TouchGetCoordinates
+ 121              		.syntax unified
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	ILI9341_TouchGetCoordinates:
+ 126              	.LVL3:
+ 127              	.LFB71:
+  21:Core/Src/touch.c **** 
+  22:Core/Src/touch.c **** bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
+ 128              		.loc 1 22 60 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 16
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		.loc 1 22 60 is_stmt 0 view .LVU11
+ 133 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 134              	.LCFI3:
+ 135              		.cfi_def_cfa_offset 36
+ 136              		.cfi_offset 4, -36
+ 137              		.cfi_offset 5, -32
+ 138              		.cfi_offset 6, -28
+ 139              		.cfi_offset 7, -24
+ 140              		.cfi_offset 8, -20
+ 141              		.cfi_offset 9, -16
+ 142              		.cfi_offset 10, -12
+ 143              		.cfi_offset 11, -8
+ 144              		.cfi_offset 14, -4
+ 145 0004 87B0     		sub	sp, sp, #28
+ 146              	.LCFI4:
+ 147              		.cfi_def_cfa_offset 64
+ 148 0006 8346     		mov	fp, r0
+ 149 0008 0391     		str	r1, [sp, #12]
+  23:Core/Src/touch.c ****     static const uint8_t cmd_read_x[] = { READ_X };
+ 150              		.loc 1 23 5 is_stmt 1 view .LVU12
+  24:Core/Src/touch.c ****     static const uint8_t cmd_read_y[] = { READ_Y };
+ 151              		.loc 1 24 5 view .LVU13
+  25:Core/Src/touch.c ****     static const uint8_t zeroes_tx[] = { 0x00, 0x00 };
+ 152              		.loc 1 25 5 view .LVU14
+  26:Core/Src/touch.c **** 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 4
+
+
+  27:Core/Src/touch.c ****     ILI9341_TouchSelect();
+ 153              		.loc 1 27 5 view .LVU15
+ 154 000a FFF7FEFF 		bl	ILI9341_TouchSelect
+ 155              	.LVL4:
+  28:Core/Src/touch.c **** 
+  29:Core/Src/touch.c ****     uint32_t avg_x = 0;
+ 156              		.loc 1 29 5 view .LVU16
+  30:Core/Src/touch.c ****     uint32_t avg_y = 0;
+ 157              		.loc 1 30 5 view .LVU17
+  31:Core/Src/touch.c ****     uint8_t nsamples = 0;
+ 158              		.loc 1 31 5 view .LVU18
+  32:Core/Src/touch.c ****     for(uint8_t i = 0; i < 16; i++) {
+ 159              		.loc 1 32 5 view .LVU19
+ 160              	.LBB2:
+ 161              		.loc 1 32 9 view .LVU20
+ 162              		.loc 1 32 17 is_stmt 0 view .LVU21
+ 163 000e 0024     		movs	r4, #0
+ 164              	.LBE2:
+  31:Core/Src/touch.c ****     uint8_t nsamples = 0;
+ 165              		.loc 1 31 13 view .LVU22
+ 166 0010 2646     		mov	r6, r4
+  30:Core/Src/touch.c ****     uint32_t avg_y = 0;
+ 167              		.loc 1 30 14 view .LVU23
+ 168 0012 A046     		mov	r8, r4
+  29:Core/Src/touch.c ****     uint32_t avg_y = 0;
+ 169              		.loc 1 29 14 view .LVU24
+ 170 0014 A246     		mov	r10, r4
+ 171              	.LVL5:
+ 172              	.L14:
+ 173              	.LBB4:
+ 174              		.loc 1 32 24 is_stmt 1 discriminator 1 view .LVU25
+ 175              		.loc 1 32 5 is_stmt 0 discriminator 1 view .LVU26
+ 176 0016 0F2C     		cmp	r4, #15
+ 177 0018 35D8     		bhi	.L16
+ 178              	.LBB3:
+  33:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 179              		.loc 1 33 9 is_stmt 1 view .LVU27
+ 180              		.loc 1 33 13 is_stmt 0 view .LVU28
+ 181 001a FFF7FEFF 		bl	ILI9341_TouchPressed
+ 182              	.LVL6:
+ 183              		.loc 1 33 11 view .LVU29
+ 184 001e 90B3     		cbz	r0, .L16
+  34:Core/Src/touch.c ****             break;
+  35:Core/Src/touch.c **** 
+  36:Core/Src/touch.c ****         nsamples++;
+ 185              		.loc 1 36 9 is_stmt 1 view .LVU30
+ 186              		.loc 1 36 17 is_stmt 0 view .LVU31
+ 187 0020 0136     		adds	r6, r6, #1
+ 188              	.LVL7:
+ 189              		.loc 1 36 17 view .LVU32
+ 190 0022 F6B2     		uxtb	r6, r6
+ 191              	.LVL8:
+  37:Core/Src/touch.c **** 
+  38:Core/Src/touch.c ****         HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)cmd_read_y, sizeof(cmd_read_y), HAL_MAX
+ 192              		.loc 1 38 9 is_stmt 1 view .LVU33
+ 193 0024 2D4D     		ldr	r5, .L21
+ 194 0026 4FF0FF33 		mov	r3, #-1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 5
+
+
+ 195 002a 0122     		movs	r2, #1
+ 196 002c 2C49     		ldr	r1, .L21+4
+ 197 002e 2846     		mov	r0, r5
+ 198 0030 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 199              	.LVL9:
+  39:Core/Src/touch.c ****         uint8_t y_raw[2];
+ 200              		.loc 1 39 9 view .LVU34
+  40:Core/Src/touch.c ****         HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)zeroes_tx, y_raw, sizeof(y_raw),
+ 201              		.loc 1 40 9 view .LVU35
+ 202 0034 DFF8AC90 		ldr	r9, .L21+8
+ 203 0038 4FF0FF37 		mov	r7, #-1
+ 204 003c 0097     		str	r7, [sp]
+ 205 003e 0223     		movs	r3, #2
+ 206 0040 04AA     		add	r2, sp, #16
+ 207 0042 4946     		mov	r1, r9
+ 208 0044 2846     		mov	r0, r5
+ 209 0046 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+ 210              	.LVL10:
+  41:Core/Src/touch.c **** 
+  42:Core/Src/touch.c ****         HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)cmd_read_x, sizeof(cmd_read_x), HAL_MAX
+ 211              		.loc 1 42 9 view .LVU36
+ 212 004a 3B46     		mov	r3, r7
+ 213 004c 0122     		movs	r2, #1
+ 214 004e 2649     		ldr	r1, .L21+12
+ 215 0050 2846     		mov	r0, r5
+ 216 0052 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 217              	.LVL11:
+  43:Core/Src/touch.c ****         uint8_t x_raw[2];
+ 218              		.loc 1 43 9 view .LVU37
+  44:Core/Src/touch.c ****         HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)zeroes_tx, x_raw, sizeof(x_raw),
+ 219              		.loc 1 44 9 view .LVU38
+ 220 0056 0097     		str	r7, [sp]
+ 221 0058 0223     		movs	r3, #2
+ 222 005a 05AA     		add	r2, sp, #20
+ 223 005c 4946     		mov	r1, r9
+ 224 005e 2846     		mov	r0, r5
+ 225 0060 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+ 226              	.LVL12:
+  45:Core/Src/touch.c **** 
+  46:Core/Src/touch.c ****         avg_x += (((uint16_t)x_raw[0]) << 8) | ((uint16_t)x_raw[1]);
+ 227              		.loc 1 46 9 view .LVU39
+ 228              		.loc 1 46 35 is_stmt 0 view .LVU40
+ 229 0064 9DF81420 		ldrb	r2, [sp, #20]	@ zero_extendqisi2
+ 230              		.loc 1 46 64 view .LVU41
+ 231 0068 9DF81530 		ldrb	r3, [sp, #21]	@ zero_extendqisi2
+ 232              		.loc 1 46 46 view .LVU42
+ 233 006c 43EA0223 		orr	r3, r3, r2, lsl #8
+ 234              		.loc 1 46 15 view .LVU43
+ 235 0070 9A44     		add	r10, r10, r3
+ 236              	.LVL13:
+  47:Core/Src/touch.c ****         avg_y += (((uint16_t)y_raw[0]) << 8) | ((uint16_t)y_raw[1]);
+ 237              		.loc 1 47 9 is_stmt 1 view .LVU44
+ 238              		.loc 1 47 35 is_stmt 0 view .LVU45
+ 239 0072 9DF81020 		ldrb	r2, [sp, #16]	@ zero_extendqisi2
+ 240              		.loc 1 47 64 view .LVU46
+ 241 0076 9DF81130 		ldrb	r3, [sp, #17]	@ zero_extendqisi2
+ 242              		.loc 1 47 46 view .LVU47
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 6
+
+
+ 243 007a 43EA0223 		orr	r3, r3, r2, lsl #8
+ 244              		.loc 1 47 15 view .LVU48
+ 245 007e 9844     		add	r8, r8, r3
+ 246              	.LVL14:
+ 247              		.loc 1 47 15 view .LVU49
+ 248              	.LBE3:
+  32:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 249              		.loc 1 32 32 is_stmt 1 view .LVU50
+  32:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 250              		.loc 1 32 33 is_stmt 0 view .LVU51
+ 251 0080 0134     		adds	r4, r4, #1
+ 252              	.LVL15:
+  32:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 253              		.loc 1 32 33 view .LVU52
+ 254 0082 E4B2     		uxtb	r4, r4
+ 255              	.LVL16:
+  32:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 256              		.loc 1 32 33 view .LVU53
+ 257 0084 C7E7     		b	.L14
+ 258              	.L16:
+  32:Core/Src/touch.c ****         if(!ILI9341_TouchPressed())
+ 259              		.loc 1 32 33 view .LVU54
+ 260              	.LBE4:
+  48:Core/Src/touch.c ****     }
+  49:Core/Src/touch.c **** 
+  50:Core/Src/touch.c ****     ILI9341_TouchUnselect();
+ 261              		.loc 1 50 5 is_stmt 1 view .LVU55
+ 262 0086 FFF7FEFF 		bl	ILI9341_TouchUnselect
+ 263              	.LVL17:
+  51:Core/Src/touch.c **** 
+  52:Core/Src/touch.c ****     if(nsamples < 16)
+ 264              		.loc 1 52 5 view .LVU56
+ 265              		.loc 1 52 7 is_stmt 0 view .LVU57
+ 266 008a 0F2E     		cmp	r6, #15
+ 267 008c 23D9     		bls	.L19
+  53:Core/Src/touch.c ****         return false;
+  54:Core/Src/touch.c **** 
+  55:Core/Src/touch.c ****     uint32_t raw_x = (avg_x / 16);
+ 268              		.loc 1 55 5 is_stmt 1 view .LVU58
+ 269              	.LVL18:
+  56:Core/Src/touch.c ****     // if(raw_x < ILI9341_TOUCH_MIN_RAW_X) raw_x = ILI9341_TOUCH_MIN_RAW_X;
+  57:Core/Src/touch.c ****     // if(raw_x > ILI9341_TOUCH_MAX_RAW_X) raw_x = ILI9341_TOUCH_MAX_RAW_X;
+  58:Core/Src/touch.c **** 
+  59:Core/Src/touch.c ****     uint32_t raw_y = (avg_y / 16);
+ 270              		.loc 1 59 5 view .LVU59
+ 271              		.loc 1 59 14 is_stmt 0 view .LVU60
+ 272 008e 4FEA1818 		lsr	r8, r8, #4
+ 273              	.LVL19:
+  60:Core/Src/touch.c ****     // if(raw_y < ILI9341_TOUCH_MIN_RAW_X) raw_y = ILI9341_TOUCH_MIN_RAW_Y;
+  61:Core/Src/touch.c ****     // if(raw_y > ILI9341_TOUCH_MAX_RAW_Y) raw_y = ILI9341_TOUCH_MAX_RAW_Y;
+  62:Core/Src/touch.c **** 
+  63:Core/Src/touch.c ****     //char data[50];
+  64:Core/Src/touch.c ****     // Uncomment this line to calibrate touchscreen:
+  65:Core/Src/touch.c ****     //sprintf(data, "raw_x = %ld, raw_y = %ld\n\0", raw_x, raw_y);
+  66:Core/Src/touch.c ****     //uint32_t data[] = {raw_x, raw_y};
+  67:Core/Src/touch.c ****     //HAL_UART_Transmit(&huart3, data, sizeof(data), 10);
+  68:Core/Src/touch.c **** 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 7
+
+
+  69:Core/Src/touch.c ****     *x = (raw_x - ILI9341_TOUCH_MIN_RAW_X) * ILI9341_TOUCH_SCALE_X / (ILI9341_TOUCH_MAX_RAW_X - ILI
+ 274              		.loc 1 69 5 is_stmt 1 view .LVU61
+ 275              		.loc 1 69 44 is_stmt 0 view .LVU62
+ 276 0092 2AF00F03 		bic	r3, r10, #15
+ 277 0096 A3EB1A1A 		sub	r10, r3, r10, lsr #4
+ 278              	.LVL20:
+ 279              		.loc 1 69 44 view .LVU63
+ 280 009a 4FEA0A1A 		lsl	r10, r10, #4
+ 281 009e AAF5AF2A 		sub	r10, r10, #358400
+ 282 00a2 AAF5C86A 		sub	r10, r10, #1600
+ 283              		.loc 1 69 68 view .LVU64
+ 284 00a6 114A     		ldr	r2, .L21+16
+ 285 00a8 A2FB0A3A 		umull	r3, r10, r2, r10
+ 286 00ac 4FEA9A3A 		lsr	r10, r10, #14
+ 287              		.loc 1 69 8 view .LVU65
+ 288 00b0 ABF800A0 		strh	r10, [fp]	@ movhi
+  70:Core/Src/touch.c ****     *y = (raw_y - ILI9341_TOUCH_MIN_RAW_Y) * ILI9341_TOUCH_SCALE_Y / (ILI9341_TOUCH_MAX_RAW_Y - ILI
+ 289              		.loc 1 70 5 is_stmt 1 view .LVU66
+ 290              		.loc 1 70 44 is_stmt 0 view .LVU67
+ 291 00b4 08EB8808 		add	r8, r8, r8, lsl #2
+ 292              	.LVL21:
+ 293              		.loc 1 70 44 view .LVU68
+ 294 00b8 4FEA8818 		lsl	r8, r8, #6
+ 295 00bc A8F51C23 		sub	r3, r8, #638976
+ 296 00c0 A3F58063 		sub	r3, r3, #1024
+ 297              		.loc 1 70 68 view .LVU69
+ 298 00c4 A2FB0323 		umull	r2, r3, r2, r3
+ 299 00c8 9B0B     		lsrs	r3, r3, #14
+ 300              		.loc 1 70 8 view .LVU70
+ 301 00ca 039A     		ldr	r2, [sp, #12]
+ 302 00cc 1380     		strh	r3, [r2]	@ movhi
+  71:Core/Src/touch.c **** 
+  72:Core/Src/touch.c ****     return true;
+ 303              		.loc 1 72 5 is_stmt 1 view .LVU71
+ 304              		.loc 1 72 12 is_stmt 0 view .LVU72
+ 305 00ce 0120     		movs	r0, #1
+ 306              	.L18:
+  73:Core/Src/touch.c **** }
+ 307              		.loc 1 73 1 view .LVU73
+ 308 00d0 07B0     		add	sp, sp, #28
+ 309              	.LCFI5:
+ 310              		.cfi_remember_state
+ 311              		.cfi_def_cfa_offset 36
+ 312              		@ sp needed
+ 313 00d2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 314              	.LVL22:
+ 315              	.L19:
+ 316              	.LCFI6:
+ 317              		.cfi_restore_state
+  53:Core/Src/touch.c **** 
+ 318              		.loc 1 53 16 view .LVU74
+ 319 00d6 0020     		movs	r0, #0
+ 320 00d8 FAE7     		b	.L18
+ 321              	.L22:
+ 322 00da 00BF     		.align	2
+ 323              	.L21:
+ 324 00dc 00000000 		.word	hspi1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 8
+
+
+ 325 00e0 00000000 		.word	.LANCHOR0
+ 326 00e4 00000000 		.word	.LANCHOR1
+ 327 00e8 00000000 		.word	.LANCHOR2
+ 328 00ec 27072E8E 		.word	-1909586137
+ 329              		.cfi_endproc
+ 330              	.LFE71:
+ 332              		.section	.rodata.cmd_read_x.0,"a"
+ 333              		.align	2
+ 334              		.set	.LANCHOR2,. + 0
+ 337              	cmd_read_x.0:
+ 338 0000 D0       		.ascii	"\320"
+ 339              		.section	.rodata.cmd_read_y.2,"a"
+ 340              		.align	2
+ 341              		.set	.LANCHOR0,. + 0
+ 344              	cmd_read_y.2:
+ 345 0000 90       		.ascii	"\220"
+ 346              		.section	.rodata.zeroes_tx.1,"a"
+ 347              		.align	2
+ 348              		.set	.LANCHOR1,. + 0
+ 351              	zeroes_tx.1:
+ 352 0000 0000     		.space	2
+ 353              		.text
+ 354              	.Letext0:
+ 355              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 356              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 357              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h"
+ 358              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 359              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 360              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 361              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 362              		.file 9 "Core/Inc/ili9341.h"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 touch.c
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:18     .text.ILI9341_TouchSelect:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:23     .text.ILI9341_TouchSelect:00000000 ILI9341_TouchSelect
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:46     .text.ILI9341_TouchSelect:00000010 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:51     .text.ILI9341_TouchUnselect:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:57     .text.ILI9341_TouchUnselect:00000000 ILI9341_TouchUnselect
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:79     .text.ILI9341_TouchUnselect:00000010 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:84     .text.ILI9341_TouchPressed:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:90     .text.ILI9341_TouchPressed:00000000 ILI9341_TouchPressed
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:114    .text.ILI9341_TouchPressed:00000014 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:119    .text.ILI9341_TouchGetCoordinates:00000000 $t
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:125    .text.ILI9341_TouchGetCoordinates:00000000 ILI9341_TouchGetCoordinates
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:324    .text.ILI9341_TouchGetCoordinates:000000dc $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:333    .rodata.cmd_read_x.0:00000000 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:337    .rodata.cmd_read_x.0:00000000 cmd_read_x.0
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:340    .rodata.cmd_read_y.2:00000000 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:344    .rodata.cmd_read_y.2:00000000 cmd_read_y.2
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:347    .rodata.zeroes_tx.1:00000000 $d
+C:\Users\ADMINI~1\AppData\Local\Temp\ccHf27oN.s:351    .rodata.zeroes_tx.1:00000000 zeroes_tx.1
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_ReadPin
+HAL_SPI_Transmit
+HAL_SPI_TransmitReceive
+hspi1
